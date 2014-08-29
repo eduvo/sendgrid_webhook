@@ -1,6 +1,6 @@
 # SendgridWebhook
 
-  sendgrid_webhook help you to generate the templates you need when you want to track the state of you email in your app.
+  SendgridWebhook help you to generate the templates you need when you want to track the state of you email in your app.
   You could assign the controller name you want to receive the sendgrid webhook and model name to track the email.
 
 ## Installation
@@ -22,7 +22,7 @@ Or install it yourself as:
 
     $ rails generate sendgrid_webhook
 
-Generate templates that controller you need to receive sendgrid webhook and model you want to track the email state. The default controller name is Webhook and model name is EmailHistroy. You assgin the name you want or skip it.
+1. Generate templates that controller you need to receive sendgrid webhook and model you want to track the email state. The default controller name is Webhook and model name is EmailHistroy. You assgin the name you want or skip it. For example `rails generate sendgrid_webhook hook EmailLog`
 
 ```ruby
       class MessageMailer < ActionMailer::Base
@@ -42,10 +42,11 @@ Generate templates that controller you need to receive sendgrid webhook and mode
       end
 ```
 
-Include the SendGrid in your Mailer, and setup the unique_args that you need to track the email. For example, the email histroy id
+2. Then Include the SendGrid in your Mailer, and setup the unique_args that you need to track the email. For example, the email_histroy_id
     
 
 ```ruby
+   # webhook_controller.rb
 
     def email
       params["_json"].group_by{|rsp| rsp["email_histroy_id"]}.each do |email_histroy_id, rsp_hash|
@@ -62,7 +63,7 @@ Include the SendGrid in your Mailer, and setup the unique_args that you need to 
 Then handle the webhook whatever you want, it is the default template.
 
 
-Other thing you may need to know. 
+Other thing you may need to know.
 
 1. The sendgrid don't have their message id when you sending the mail, so you need to create your own (In this example is `sendgrid_unique_args :email_history_id => email_history.id`) through X-SMTPAPI insert the unique argument, you could know more from [Unique Arguments](http://sendgrid.com/docs/API_Reference/SMTP_API/unique_arguments.html)
 
