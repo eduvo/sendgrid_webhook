@@ -7,6 +7,7 @@
 
 Add this line to your application's Gemfile:
 
+    gem 'sendgrid'
     gem 'sendgrid_webhook'
 
 And then execute:
