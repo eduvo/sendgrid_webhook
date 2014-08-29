@@ -1,8 +1,16 @@
 Description:
-    Explain the generator
+    sendgrid_webhook help you to generate the templates you need when you want to track the state of you email in your app.
+    You could assign the controller name you want to receive the sendgrid webhook and model name to track the email.
+    rails generate sendgrid_webhook [CONTROLLER_NAME] [MODEL_NAME]
 
 Example:
-    rails generate sendgrid_webhook Thing
+    rails generate sendgrid_webhook Hook EmailHistroy
 
     This will create:
-        what/will/it/create
+     create  db/migrate/20140829030806_sendgrid_webhook_create_email_histories.rb
+     create  app/models/email_histroy.rb
+     create  spec/models/email_histroy_spec.rb
+     create  app/controllers/hook_controller.rb
+     route   namespace :hook do
+       post 'email'
+     end
